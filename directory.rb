@@ -9,13 +9,20 @@ def input_students
     name = gets.chomp
     break if name.empty?
     
+    puts "Cohort:"
+    cohort = gets.chomp
+    if cohort.empty?
+      cohort = "None"
+    end
+    cohort.to_sym
+    
     puts "Country of birth:"
     country_of_birth = gets.chomp
     
     puts "Height:"
     height = gets.chomp
     
-    students << {name: name, cohort: :november, country_of_birth: country_of_birth, height: height}
+    students << {name: name, cohort: cohort, country_of_birth: country_of_birth, height: height}
     
     puts "Now we have #{students.count} students"
   end
