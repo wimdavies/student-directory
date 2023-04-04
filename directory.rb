@@ -4,12 +4,21 @@ def input_students
   
   students = []
   
-  name = gets.chomp
-  #while the name is not empty, repeat this loop:
-  while !name.empty? do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
+  while true do
+    puts "Name:"
     name = gets.chomp
+    break if name.empty?
+    
+    puts "Country of birth:"
+    country_of_birth = gets.chomp
+    
+    puts "Height:"
+    height = gets.chomp
+    
+    students << {name: name, cohort: :november, country_of_birth: country_of_birth, height: height}
+    
+    puts "Now we have #{students.count} students"
+  
   end
   
   students
@@ -21,12 +30,10 @@ def print_header
 end
 
 def print(students)
-  index = 0
-  
-  until index == students.length
-    student = students[index]
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
-    index += 1
+  students.each_with_index do |student, index|
+    if student[:name].length < 12
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
@@ -38,9 +45,3 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-
-#  students.each_with_index do |student, index|
-#    if student[:name].length < 12
-#      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-#    end
-#  end
