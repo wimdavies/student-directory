@@ -23,7 +23,7 @@ end
 def print(students)
   index = 0
   
-  while index < students.length
+  until index == students.length
     student = students[index]
     puts "#{student[:name]} (#{student[:cohort]} cohort)"
     index += 1
