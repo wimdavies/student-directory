@@ -32,8 +32,7 @@ def print(students)
   longest_name_length = students.map { |student| student[:name].length }.max
   
   students.each_with_index do |student, index|
-    name = student[:name].center(longest_name_length)
-    puts "#{index + 1}. #{name} (#{student[:cohort]} cohort)"
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(longest_name_length + 50)
   end
 end
 
