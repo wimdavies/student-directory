@@ -18,7 +18,6 @@ def input_students
     students << {name: name, cohort: :november, country_of_birth: country_of_birth, height: height}
     
     puts "Now we have #{students.count} students"
-  
   end
   
   students
@@ -30,10 +29,11 @@ def print_header
 end
 
 def print(students)
+  longest_name_length = students.map { |student| student[:name].length }.max
+  
   students.each_with_index do |student, index|
-    if student[:name].length < 12
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
+    name = student[:name].center(longest_name_length)
+    puts "#{index + 1}. #{name} (#{student[:cohort]} cohort)"
   end
 end
 
