@@ -4,17 +4,33 @@ def input_students
   
   students = []
   
+  cohorts = [
+    :january,
+    :february,
+    :march,
+    :april,
+    :may,
+    :june,
+    :july,
+    :august,
+    :september,
+    :october,
+    :november,
+    :december,
+    :no,
+  ]
+  
   while true do
     puts "Name:"
     name = gets.chomp
     break if name.empty?
-    
-    puts "Cohort:"
-    cohort = gets.chomp
-    if cohort.empty?
-      cohort = "No"
+  
+    cohort = nil
+    until cohorts.include?(cohort) do
+      puts "Cohort:"
+      cohort = gets.chomp.downcase.to_sym
+      cohort = :no unless cohorts.include?(cohort)
     end
-    cohort.to_sym
     
     students << {name: name, cohort: cohort}
     
