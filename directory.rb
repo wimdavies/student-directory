@@ -26,10 +26,15 @@ def input_students
     break if name.empty?
   
     cohort = nil
-    until cohorts.include?(cohort) do
+    loop do
       puts "Cohort:"
-      cohort = gets.chomp.downcase.to_sym
-      cohort = :no unless cohorts.include?(cohort)
+      user_cohort = gets.chomp.downcase
+      if user_cohort == 'no' || cohorts.include?(user_cohort.to_sym)
+        cohort = user_cohort.to_sym
+        break
+      else
+        puts "Invalid cohort. Enter a valid cohort, or 'no':"
+      end
     end
     
     students << {name: name, cohort: cohort}
