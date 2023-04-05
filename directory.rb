@@ -16,12 +16,6 @@ def input_students
     end
     cohort.to_sym
     
-    puts "Country of birth:"
-    country_of_birth = gets.chomp
-    
-    puts "Height:"
-    height = gets.chomp
-    
     students << {name: name, cohort: cohort, country_of_birth: country_of_birth, height: height}
     
     puts "Now we have #{students.count} students"
