@@ -30,23 +30,21 @@ def input_students
 end
 
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(50)
+  puts "-------------".center(50)
 end
 
 def print(students)
-  longest_name_length = students.map { |student| student[:name].length }.max
-  
   students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(longest_name_length + 50)
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
   end
 end
 #printing grammatically correct counts
 def print_footer(students)
   if students.count == 1
-    puts "Overall, we have #{students.count} great student"
+    puts "Overall, we have #{students.count} great student".center(50)
   else
-    puts "Overall, we have #{students.count} great students"
+    puts "Overall, we have #{students.count} great students".center(50)
   end
 end
 
