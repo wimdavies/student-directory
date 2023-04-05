@@ -12,13 +12,18 @@ def input_students
     puts "Cohort:"
     cohort = gets.chomp
     if cohort.empty?
-      cohort = "None"
+      cohort = "No"
     end
     cohort.to_sym
     
-    students << {name: name, cohort: cohort, country_of_birth: country_of_birth, height: height}
+    students << {name: name, cohort: cohort}
     
-    puts "Now we have #{students.count} students"
+    #printing grammatically correct counts
+    if students.count == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
   end
   
   students
@@ -36,9 +41,13 @@ def print(students)
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(longest_name_length + 50)
   end
 end
-
+#printing grammatically correct counts
 def print_footer(students)
-  puts puts "Overall, we have #{students.count} great students"
+  if students.count == 1
+    puts "Overall, we have #{students.count} great student"
+  else
+    puts "Overall, we have #{students.count} great students"
+  end
 end
 
 students = input_students
