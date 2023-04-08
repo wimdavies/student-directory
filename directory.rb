@@ -22,13 +22,13 @@ def input_students
   
   while true do
     puts "Name:"
-    name = gets.chomp
+    name = gets.delete("\n")
     break if name.empty?
   
     cohort = nil
     loop do
       puts "Cohort:"
-      user_cohort = gets.chomp.downcase
+      user_cohort = gets.delete("\n").downcase
       if user_cohort == 'no' || cohorts.include?(user_cohort.to_sym)
         cohort = user_cohort.to_sym
         break
