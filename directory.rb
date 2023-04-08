@@ -1,8 +1,10 @@
+@students = [] # an empty array accessible to all methods
+
+# todo: refactor cohorts as an instance variable here
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  
-  students = []
   
   cohorts = [
     :january,
@@ -37,17 +39,15 @@ def input_students
       end
     end
     
-    students << {name: name, cohort: cohort}
+    @students << {name: name, cohort: cohort}
     
     #printing grammatically correct counts
-    if students.count == 1
-      puts "Now we have #{students.count} student"
+    if @students.count == 1
+      puts "Now we have #{@students.count} student"
     else
-      puts "Now we have #{students.count} students"
+      puts "Now we have #{@students.count} students"
     end
   end
-  
-  students
 end
 
 def print_header
@@ -55,16 +55,16 @@ def print_header
   puts "-------------".center(50)
 end
 
-def print(students)
-  if students.count > 1
-    students.each_with_index do |student, index|
+def print_student_list
+  if @students.count > 1
+    @students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
     end
   end
 end
 
 #transforms students to cohorts order, prints as above. Should be refactored to not require cohort repeat
-def print_by_cohort(students)
+def print_by_cohort
   cohorts = [
     :january,
     :february,
@@ -81,49 +81,57 @@ def print_by_cohort(students)
     :no,
   ]  
   
-  students.sort_by! do |student|
+  @students.sort_by! do |student|
     cohorts.index(student[:cohort])
   end
   
   #only prints list if at least one student was inputted
-  if students.count > 1
-    students.each_with_index do |student, index|
+  if @students.count > 1
+    @students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort})".center(50)
     end
   end
 end
 
 #printing grammatically correct counts
-def print_footer(students)
-  if students.count == 1
-    puts "Overall, we have #{students.count} great student".center(50)
+def print_footer
+  if @students.count == 1
+    puts "Overall, we have #{@students.count} great student".center(50)
   else
-    puts "Overall, we have #{students.count} great students".center(50)
+    puts "Overall, we have #{@students.count} great students".center(50)
+  end
+end
+
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit"
+end
+
+def show_students
+  print_header
+  print_student_list
+  print_footer
+end
+
+def process(selection)
+  case selection
+  when "1"
+    input_students
+  when "2"
+    show_students
+  when "9"
+    exit # will cause the program to terminate
+  else
+    puts "I don't know what you meant, try again"
   end
 end
 
 def interactive_menu
-  students = []
-  loop do
-    # 1. print the menu and the user what to do
-    puts "1. Input the students"
-    puts "2. Show the students"
-    puts "9. Exit"
-    # 2. read the input input and save it into a variable
-    selection = gets.chomp
-    # 3. do what the user has asked
-    case selection
-    when "1"
-      students = input_students
-    when "2"
-      print_header
-      print(students)
-      print_footer(students)
-    when "9"
-      exit # will cause the program to terminate
-    else
-      puts "I don't know what you meant, try again"
-    end
+ loop do
+    print_menu
+    process(gets.chomp)
   end
 end
 
