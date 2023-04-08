@@ -83,8 +83,11 @@ def print_by_cohort(students)
     cohorts.index(student[:cohort])
   end
   
-  students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort})".center(50)
+  #only prints list if at least onne student was inputted
+  if students.count > 1
+    students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort})".center(50)
+    end
   end
 end
 
