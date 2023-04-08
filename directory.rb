@@ -57,9 +57,37 @@ end
 
 def print(students)
   students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
   end
 end
+
+#transforms students to cohorts order, prints as above. Should be refactored to not require cohort repeat
+def print_by_cohort(students)
+  cohorts = [
+    :january,
+    :february,
+    :march,
+    :april,
+    :may,
+    :june,
+    :july,
+    :august,
+    :september,
+    :october,
+    :november,
+    :december,
+    :no,
+  ]  
+  
+  students.sort_by! do |student|
+    cohorts.index(student[:cohort])
+  end
+  
+  students.each_with_index do |student, index|
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort})".center(50)
+  end
+end
+
 #printing grammatically correct counts
 def print_footer(students)
   if students.count == 1
@@ -71,5 +99,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_by_cohort(students)
 print_footer(students)
