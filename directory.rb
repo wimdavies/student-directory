@@ -1,7 +1,5 @@
 @students = [] # an empty array accessible to all methods
 
-# todo: refactor cohorts as an instance variable here
-
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -63,36 +61,6 @@ def print_student_list
   end
 end
 
-#transforms students to cohorts order, prints as above. Should be refactored to not require cohort repeat
-def print_by_cohort
-  cohorts = [
-    :january,
-    :february,
-    :march,
-    :april,
-    :may,
-    :june,
-    :july,
-    :august,
-    :september,
-    :october,
-    :november,
-    :december,
-    :no,
-  ]  
-  
-  @students.sort_by! do |student|
-    cohorts.index(student[:cohort])
-  end
-  
-  #only prints list if at least one student was inputted
-  if @students.count > 1
-    @students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort})".center(50)
-    end
-  end
-end
-
 #printing grammatically correct counts
 def print_footer
   if @students.count == 1
@@ -101,7 +69,6 @@ def print_footer
     puts "Overall, we have #{@students.count} great students".center(50)
   end
 end
-
 
 def print_menu
   puts "1. Input the students"
@@ -113,6 +80,18 @@ def show_students
   print_header
   print_student_list
   print_footer
+end
+
+def save_students
+  #open the file file for writing
+  file = File.open("students.csv", "w")
+  #iterate over the array of students
+  @students.each do |student|
+    student_data = [student[:name], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
 end
 
 def process(selection)
