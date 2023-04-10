@@ -92,7 +92,7 @@ def save_students
   file.close
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename)
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
@@ -102,7 +102,7 @@ def load_students(filename = "students.csv")
 end
 
 # loads students.csv by default if file not supplied
-def try_load_students
+def load_on_startup
   ARGV.empty? ? filename = "students.csv" : filename = ARGV.first
   load_students(filename)
   puts "Loaded #{@students.count} from #{filename}"
@@ -140,5 +140,5 @@ def interactive_menu
   end
 end
 
-try_load_students
+load_on_startup
 interactive_menu
