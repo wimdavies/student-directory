@@ -1,5 +1,9 @@
 @students = [] # an empty array accessible to all methods
 
+def push_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
+end
+
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
@@ -30,14 +34,14 @@ def input_students
       puts "Cohort:"
       user_cohort = STDIN.gets.chomp.downcase
       if user_cohort == 'no' || cohorts.include?(user_cohort.to_sym)
-        cohort = user_cohort.to_sym
+        cohort = user_cohort
         break
       else
         puts "Invalid cohort. Enter a valid cohort, or 'no':"
       end
     end
     
-    @students << {name: name, cohort: cohort}
+    push_student(name, cohort)
     
     #printing grammatically correct counts
     if @students.count == 1
@@ -92,7 +96,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
-    @students << {name: name, cohort: cohort.to_sym}
+    push_student(name, cohort)
   end
   file.close
 end
