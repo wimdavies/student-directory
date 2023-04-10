@@ -54,7 +54,7 @@ def print_header
 end
 
 def print_student_list
-  if @students.count > 1
+  if @students.count > 0
     @students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(50)
     end
@@ -73,6 +73,7 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
+  puts "3. Save the list to students.csv"
   puts "9. Exit"
 end
 
@@ -100,6 +101,8 @@ def process(selection)
     input_students
   when "2"
     show_students
+  when "3"
+    save_students
   when "9"
     exit # will cause the program to terminate
   else
