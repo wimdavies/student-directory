@@ -84,8 +84,11 @@ def show_students
 end
 
 def save_students
+  #gets a user-specified filename
+  puts "Enter name of file to save to:"
+  filename = STDIN.gets.chomp
   #open the file file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   #iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -93,7 +96,7 @@ def save_students
     file.puts csv_line
   end
   file.close
-  puts "Students saved to student.csv"
+  puts "Students saved to #{filename}"
 end
 
 #user-specified filename
@@ -117,8 +120,8 @@ end
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load the list from students.csv"
+  puts "3. Save the list to a file"
+  puts "4. Load the list from a file"
   puts "9. Exit"
 end
 
