@@ -96,21 +96,22 @@ def save_students
   puts "Students saved to student.csv"
 end
 
-def load_students(filename = "students.csv")
-  file = File.open("students.csv", "r")
+#user-specified filename
+def load_students
+  puts "Enter name of file to load from:"
+  filename = STDIN.gets.chomp
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
     push_student(name, cohort)
   end
   file.close
-  puts "Students loaded from students.csv"
+  puts "Loaded #{@students.count} from #{filename}."
 end
 
 # loads students.csv by default if file not supplied
 def load_on_startup
-  ARGV.empty? ? filename = "students.csv" : filename = ARGV.first
-  load_students(filename)
-  puts "Loaded #{@students.count} from #{filename}"
+  load_students if ARGV.empty?
 end
 
 def print_menu
