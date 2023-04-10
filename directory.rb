@@ -118,11 +118,19 @@ def load_on_startup
   load_students if ARGV.empty?
 end
 
+def view_source_code
+  File.open(__FILE__, "r") do |file|
+    source_code = file.read
+    puts source_code
+  end
+end
+
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to a file"
   puts "4. Load the list from a file"
+  puts "5. View this program's source code"
   puts "9. Exit"
 end
 
@@ -140,6 +148,9 @@ def process(selection)
   when "4"
     puts "You selected: 4."
     load_students
+  when "5"
+    puts "You selected: 5."
+    view_source_code
   when "9"
     puts "You selected: 9. Program will now exit."
     exit # will cause the program to terminate
